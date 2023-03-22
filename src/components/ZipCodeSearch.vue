@@ -1,6 +1,9 @@
 <template>
   <div class="container mx-auto max-w-[720px] py-10 px-5">
-    <router-link to="/" class="bg-blue-300 rounded px-8 p-2 transition-all hover:bg-blue-400">Back</router-link>
+    <div class="flex justify-between">
+      <router-link to="/" class="bg-blue-300 rounded px-8 p-2 transition-all hover:bg-blue-400">Back</router-link>
+      <UserDataButton />
+    </div>
     <div class="flex flex-col items-center py-8">
       <form @submit.prevent="onSendZipCode" class="mt-5 w-full">
         <label for="zipcode">Enter your zipcode:</label>
@@ -12,19 +15,18 @@
       </form>
     </div>
     <ZipCodeInfo v-if="!zipCodeReqestError && Object.keys(zipCodeInfoData).length" :zipCodeInfoData="zipCodeInfoData" />
-    <pulse-loader v-if="isLoading" :loading="loading" :color="color" :size="size" class="text-center"></pulse-loader>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import ZipCodeInfo from './ZipCodeInfo.vue';
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import UserDataButton from './UserDataButton.vue';
 export default {
   name: "ZipCodeSearch",
   components: {
     ZipCodeInfo,
-    PulseLoader,
+    UserDataButton,
   },
   data() {
     return {
@@ -37,7 +39,7 @@ export default {
   methods: {
     onSendZipCode() {
       this.isLoading = true;
-      axios.get(`${import.meta.env.VITE_SMARTYSTREETS_URL}lookup?auth-id=${import.meta.env.VITE_AUTH_ID}&auth-token=${import.meta.env.VITE_AUTH_TOKEN}&zipcode=${this.zipCodeInput}`)
+      axios.get(`${import.meta.env.VITE_SMARTYSTREETS_URL}lookup?auth-id=${import.meta.env.VITE_SMARTYSTREETS_ID}&auth-token=${import.meta.env.VITE_SMARTYSTREETS_TOKEN}&zipcode=${this.zipCodeInput}`)
         .then(res => {
           const { reason, zipcodes } = res.data[0];
           if (!reason) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex basis-0">
+  <div class="relative h-screen flex basis-0">
     <img src="../assets/greetings.jpg" alt="sea" class="h-screen w-1/2 max-xl:hidden">
 
     <div class="flex flex-col items-center justify-center gap-40 p-5 w-full">
