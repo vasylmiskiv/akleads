@@ -39,7 +39,11 @@ export default {
   methods: {
     onSendZipCode() {
       this.isLoading = true;
-      axios.get(`${import.meta.env.VITE_SMARTYSTREETS_URL}lookup?key=${import.meta.env.VITE_SMARTYSTREETS_KEY}&auth-id=${import.meta.env.VITE_SMARTYSTREETS_ID}&auth-token=${import.meta.env.VITE_SMARTYSTREETS_TOKEN}&zipcode=${this.zipCodeInput}`)
+      axios.get(`${import.meta.env.VITE_ZIPCODE_API}`, {
+        params: {
+          zipcode: this.zipCodeInput,
+        }
+      })
         .then(res => {
           const { reason, zipcodes } = res.data[0];
           if (!reason) {
