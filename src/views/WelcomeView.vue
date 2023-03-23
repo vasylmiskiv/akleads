@@ -9,5 +9,18 @@
     </div>
   </div>
 </template>
-
+<script>
+import { mapActions } from 'vuex';
+export default {
+  name: "WelcomeView",
+  methods: {
+    ...mapActions([
+      'getClientData'
+    ])
+  },
+  mounted() {
+    this.getClientData();
+  }
+}
+</script>
 <style></style>

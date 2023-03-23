@@ -1,11 +1,18 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+// import VuexPersistence from 'vuex-persist'
+
+/* Vuex persist plugin */
+// const vuexLocal = new VuexPersistence({
+//   storage: window.localStorage
+// })
 
 const store = createStore({
   state() {
     return {
       isLoading: false,
       isUserDataModalActive: false,
+      infoDataByZipCode: {},
       userAgentData: {},
       clientData: {},
       statusText: ''
@@ -17,6 +24,9 @@ const store = createStore({
     }
   },
   mutations: {
+    setInfoDataByZipCode: (state, infoData) => {
+      state.infoDataByZipCode = infoData
+    },
     setIsUserDataModalActive: (state, isActive) => {
       state.isUserDataModalActive = isActive
     },
@@ -31,6 +41,24 @@ const store = createStore({
     }
   },
   actions: {
+    getDataByZipCode({ commit }, zipcode) {
+      axios
+        .get(`${import.meta.env.VITE_ZIPCODE_API}`, {
+          params: {
+            zipcode
+          }
+        })
+        .then((res) => {
+          console.log(res.data)
+          const { reason, zipcodes } = res.data[0]
+          if (!reason) {
+            commit('setInfoDataByZipCode', zipcodes[0])
+          } else {
+            commit('setStatusText', reason)
+          }
+        })
+        .catch((err) => console.log(err))
+    },
     getClientData({ commit }) {
       commit('setUserAgentData', {
         browser: window.navigator.userAgentData.brands[0].brand,
@@ -45,15 +73,19 @@ const store = createStore({
         .then((res) => {
           if (res.status === 200) {
             commit('setClientData', res.data)
-            commit('setIsUserDataModalActive', true)
           } else {
             commit('setStatusText', res.statusText)
           }
         })
-        .catch((err) => console.log(err))
+        .catch((err) => commit('setStatusText', err.message))
+    },
+    toggleModalInfo({ commit }, isOpen) {
+      commit('setIsUserDataModalActive', isOpen)
     }
   },
   modules: {}
+  /* Vuex persist plugin */
+  // plugins: [vuexLocal.plugin]
 })
 
 export default store

@@ -1,25 +1,20 @@
 <template>
-  <button @click="onGetClientData()" class="bg-purple-400 rounded py-2 px-4 transition-all hover:bg-purple-500">{{
+  <button @click="onOpenModal" class="bg-purple-400 rounded py-2 px-4 transition-all hover:bg-purple-500">{{
     isLoading ?
     "Loading..." : "Get client data" }}</button>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
   name: "UserData",
   components: {},
-  data() {
-    return {
-      isShowedModal: false,
-    }
-  },
   methods: {
     ...mapActions([
-      'getClientData',
+      'toggleModalInfo'
     ]),
-    onGetClientData() {
-      this.getClientData();
+    onOpenModal() {
+      this.toggleModalInfo(true);
     }
   }
 }
