@@ -23,6 +23,9 @@ const store = createStore({
   getters: {
     getImageUrl: (state) => {
       return state.clientData.flag.png
+    },
+    getClientIp: (state) => {
+      return state.clientData.ip_address
     }
   },
   mutations: {

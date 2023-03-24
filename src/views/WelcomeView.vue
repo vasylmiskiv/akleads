@@ -10,16 +10,21 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: "WelcomeView",
   methods: {
     ...mapActions([
       'getClientData'
-    ])
+    ]),
+    ...mapGetters([
+      'getClientIp'
+    ]),
   },
   mounted() {
-    this.getClientData();
+    if (!this.getClientIp()) {
+      this.getClientData();
+    }
   }
 }
 </script>
