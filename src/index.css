@@ -4,6 +4,6 @@
 
 @layer components {
   .info-item {
-    @apply flex justify-between hover:bg-gray-200 cursor-pointer py-1 px-4 transition-all
+    @apply flex justify-between hover:bg-gray-200 cursor-pointer py-1 px-3 transition-all
   }
 }

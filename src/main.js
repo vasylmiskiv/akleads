@@ -6,9 +6,16 @@ import './index.css'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import {
+  faUserSecret,
+  faXmark,
+  faUser,
+  faArrowLeft,
+  faPaperPlane
+} from '@fortawesome/free-solid-svg-icons'
+import 'vue3-toastify/dist/index.css'
 
-library.add(faUserSecret)
+library.add(faUserSecret, faXmark, faUser, faArrowLeft, faPaperPlane)
 
 const app = createApp(App)
 

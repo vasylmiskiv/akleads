@@ -1,5 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import { toast } from 'vue3-toastify'
+
 // import VuexPersistence from 'vuex-persist'
 
 /* Vuex persist plugin */
@@ -49,15 +51,22 @@ const store = createStore({
           }
         })
         .then((res) => {
-          console.log(res.data)
           const { reason, zipcodes } = res.data[0]
+
           if (!reason) {
             commit('setInfoDataByZipCode', zipcodes[0])
           } else {
             commit('setStatusText', reason)
+            toast(reason, {
+              autoClose: 5000
+            })
           }
         })
-        .catch((err) => console.log(err))
+        .catch((err) =>
+          toast(err.message, {
+            autoClose: 5000
+          })
+        )
     },
     getClientData({ commit }) {
       commit('setUserAgentData', {
@@ -75,9 +84,16 @@ const store = createStore({
             commit('setClientData', res.data)
           } else {
             commit('setStatusText', res.statusText)
+            toast(res.statusText, {
+              autoClose: 5000
+            })
           }
         })
-        .catch((err) => commit('setStatusText', err.message))
+        .catch((err) =>
+          toast(err.message, {
+            autoClose: 5000
+          })
+        )
     },
     toggleModalInfo({ commit }, isOpen) {
       commit('setIsUserDataModalActive', isOpen)

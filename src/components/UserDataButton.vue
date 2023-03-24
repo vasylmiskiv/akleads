@@ -1,7 +1,7 @@
 <template>
-  <button @click="onOpenModal" class="bg-purple-400 rounded py-2 px-4 transition-all hover:bg-purple-500">{{
-    isLoading ?
-    "Loading..." : "Get client data" }}</button>
+  <button @click="onOpenModal"
+    class="flex justify-center items-center gap-4 bg-purple-400 rounded py-2 px-4 transition-all hover:bg-purple-500"><font-awesome-icon
+      :icon="['fas', 'user']" />Get client data</button>
 </template>
 
 <script>

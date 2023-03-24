@@ -1,10 +1,13 @@
 <template>
   <div class="absolute w-full h-screen flex justify-center items-center bg-modal px-5 z-10 backdrop-blur-sm">
-    <div class="w-[720px] flex bg-white pb-8 pt-2 px-5 flex-col rounded shadow-xl">
-      <button class="ml-auto" @click="onCloseModal">
-        <font-awesome-icon icon="fa-sharp fa-solid fa-door-closed" />x
-      </button>
-      <div class="mt-2">
+    <div class="w-[720px] flex bg-white pb-8 pt-5 px-5 flex-col rounded shadow-xl">
+      <div class="flex items-center justify-center px-3">
+        <h3 class="font-semibold text-xl">Your information</h3>
+        <button class="ml-auto" @click="onCloseModal">
+          <font-awesome-icon :icon="['fass', 'xmark']" />
+        </button>
+      </div>
+      <div class="mt-6">
         <div class="info-item">Your ip address: <span class="font-semibold">{{ clientData.ip_address
         }}</span></div>
         <div class="info-item">Your country: <span class="flex items-center justify-center gap-2 font-semibold">{{

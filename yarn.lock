@@ -1477,6 +1477,11 @@ vue-spinner@^1.0.4:
     "@vue/server-renderer" "3.2.47"
     "@vue/shared" "3.2.47"
 
+vue3-toastify@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.npmjs.org/vue3-toastify/-/vue3-toastify-0.1.6.tgz"
+  integrity sha512-Ijk/tmpYrQLzyK/a0hFd5E/Gfoj+UkUGRLMU71JZpZ5cMUbkwWjXjdJ2xIXeGh/MJtl3xQWClG3z0PWcKz3ksQ==
+
 vuex-persist@^3.1.3:
   version "3.1.3"
   resolved "https://registry.npmjs.org/vuex-persist/-/vuex-persist-3.1.3.tgz"
